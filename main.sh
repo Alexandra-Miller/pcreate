@@ -1,18 +1,39 @@
 #!/bin/bash
 
+: '
+@filename: scheduler
+  @repository: https://github.com/Alexandra-Miller/scheduler
+  @creator: Alexandra Marie Miller
+  @description
+A simple script to create and configure basic install scripts in new projects.
+USAGE: pcreate PROJECT_NAME OPTIONS
+OPTIONS:
+-c                      standard program in c
+-c++                    standard program in C++
+-e      --elixir        standard program in elixir
+-o      --other         standard program with no specified language
+-h      --haskell       standard program in haskell
+-t      --typescript    standard program written in typescript
+-b      --bash                  utility written in bash with install script
+-cu     --c-utility             utility written in c with install script
+-tu     --typescript-utility    utility written in typescript with install script
+  @description
+  @dependancies: bash, git
+'
 
 # ====================  CONSTANTS  =============================================
 
-HELPMSG="USAGE: pcreate PROJECT_NAME PROJECT_TYPE
-PROJECT TYPES:
-c
-c++
-o   other
-h   haskell
-t   typescript
-b   bash                linux utility written in bash with install script
-cu  c-utility           linux utility written in c with install script
-tu  typescript-utility  linux utility written in typescript with install script
+HELPMSG="USAGE: pcreate PROJECT_NAME OPTIONS
+OPTIONS:
+-c                      standard program in c
+-c++                    standard program in C++
+-e      --elixir        standard program in elixir
+-o      --other         standard program with no specified language
+-h      --haskell       standard program in haskell
+-t      --typescript    standard program written in typescript
+-b      --bash                  utility written in bash with install script
+-cu     --c-utility             utility written in c with install script
+-tu     --typescript-utility    utility written in typescript with install script
 "
 
 GITIGNORE="https://gist.githubusercontent.com/Alexandra-Miller/b47139749f861f02d3176f57f17626ce/raw/160e75b70f51c2c5ef5201735f0d457abadf829d/.gitignore"
@@ -107,7 +128,7 @@ createTypescript () {
 
 # $1 = project name
 createBash () {
-    cp $RESOURCES_DIR/bash/
+    cp $RESOURCES_DIR/bash/* $1/
     configMake $1
     configInstall $1
     configFile $1 main.sh
@@ -145,23 +166,23 @@ elif [ $# -eq 2 ]
 then
     mkdir $1
 
-    [ $2 = "c" ] && createC $1
+    [ $2 = "-c" ] && createC $1
 
-    [ $2 = "c++" ] && createCpp $1
+    [ $2 = "-c++" ] && createCpp $1
     
-    [ $2 = "elixir" ] || [ $2 = "e" ] && createElixir $1
+    [ $2 = "--elixir" ] || [ $2 = "-e" ] && createElixir $1
     
-    [ $2 = "haskell" ] || [ $2 = "h" ] && createHaskell $1
+    [ $2 = "--haskell" ] || [ $2 = "-h" ] && createHaskell $1
 
-    [ $2 = "other" ] || [ $2 = "o" ] && createOther $1
+    [ $2 = "--other" ] || [ $2 = "-o" ] && createOther $1
     
-    [ $2 = "typescript" ] || [ $2 = "t" ] && createTypescript $1
+    [ $2 = "--typescript" ] || [ $2 = "-t" ] && createTypescript $1
 
-    [ $2 = "bash" ] || [ $2 = "b" ] && createBash $1
+    [ $2 = "--bash" ] || [ $2 = "-b" ] && createBash $1
     
-    [ $2 = "c" ] && createC $1
+    [ $2 = "--c-util" ] || [ $2 = "-c" ] && createC $1
     
-    [ $2 = "typescript-util" ] || [ $2 = "tu" ] && createTypescriptUtil $1
+    [ $2 = "--typescript-util" ] || [ $2 = "-tu" ] && createTypescriptUtil $1
     
 
     createGit $1
