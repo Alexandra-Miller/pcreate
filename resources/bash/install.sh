@@ -5,7 +5,7 @@
 if [ -d "resources" ]
 then
     mkdir -p ~/.resources/@@PROJECT@@/
-    cp resources ~/.resources/@@PROJECT@@/
+    cp -r resources ~/.resources/@@PROJECT@@/
 fi
 
 mkdir -p $HOME/bin
