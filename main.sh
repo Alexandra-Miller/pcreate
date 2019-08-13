@@ -48,7 +48,7 @@ STANDARD_HEADER="
 @deps: 
 "
 
-RESOURCES_DIR="$HOME/.resources/pcreate/resources"
+RESOURCES_DIR="$HOME/.resources/pcreate/"
 [ -d "resources" ] && RESOURCES_DIR="resources"
 
 
