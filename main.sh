@@ -59,14 +59,14 @@ createGit () {
     ( 
     cd $1
 
-    # create git repo
-    git init
-    curl $GITIGNORE -o .gitignore
-    
     # create README.md
     echo "# $1" >> README.md
     read -p "Enter Project Description:" descText
     echo "$descText" >> README.md
+    
+    # create git repo
+    git init
+    curl $GITIGNORE -o .gitignore
     
     # add git files and commit
     git add .
