@@ -1,9 +1,8 @@
+PROGRAM_NAME    =  "@@PROJECT@@"
+
 compile_main:
-	gcc -Wall -Wextra main.c -o @@PROJECT@@
+	gcc -Wall -Wextra main.c -o $(PROGRAM_NAME)
 
 clean:
-	rm -rf @@PROJECT@@
-
-document:
-	autodoc *.c
+	rm -rf $(PROGRAM_NAME)
 

@@ -58,9 +58,17 @@ RESOURCES_DIR="$HOME/.resources/pcreate/"
 createGit () {
     ( 
     cd $1
+
+    # create git repo
     git init
-    echo "# $1" >> README.md
     curl $GITIGNORE -o .gitignore
+    
+    # create README.md
+    echo "# $1" >> README.md
+    read -p "Enter Project Description:" descText
+    echo "$descText" >> README.md
+    
+    # add git files and commit
     git add .
     git commit -m "Initial commit"
     )
@@ -69,11 +77,6 @@ createGit () {
 # $1 = project name
 configMake () {
     sed -i "s/@@PROJECT@@/$1/g" $1/makefile
-}
-
-# $1 = project name
-configInstall () {
-    sed -i "s/@@PROJECT@@/$1/g" $1/install.sh
 }
 
 # $1 = project name     $2 = main filename
@@ -130,7 +133,6 @@ createTypescript () {
 createBash () {
     cp $RESOURCES_DIR/bash/* $1/
     configMake $1
-    configInstall $1
     configFile $1 main.sh
 }
 
@@ -138,7 +140,6 @@ createBash () {
 createCUtil () {
     cp $RESOURCES_DIR/c-util/* $1/
     configMake $1
-    configInstall $1
     configFile $1 main.c
 }
 
@@ -151,7 +152,6 @@ createTypescriptUtil () {
     )
     cp $RESOURCES_DIR/typescript-util/* $1/
     configMake $1
-    configInstall $1
     configFile $1 index.ts
 }
 

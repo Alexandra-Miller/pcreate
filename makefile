@@ -10,3 +10,6 @@ install:
 uninstall:
 	rm -rf $(RESOURCES_DIR)/$(PROGRAM_NAME)
 	rm $(BIN_INSTALL_DIR)/$(PROGRAM_NAME)
+
+document:
+	autodoc main.sh
